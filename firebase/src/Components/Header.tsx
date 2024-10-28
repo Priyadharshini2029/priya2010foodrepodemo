@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { useDetailsContext } from '../Provider/DataContext';
 import { db } from '@/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs } from "firebase/firestore"; // Make sure this is correct
+
 
 interface Product {
   name: string;
   Price: string;
   Quantity: string;
-  id: string;
+  id?: string ;
 }
 
 interface DemoHeaderProps {
