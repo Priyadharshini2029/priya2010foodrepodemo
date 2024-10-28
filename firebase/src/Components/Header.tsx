@@ -29,10 +29,12 @@ const Header: React.FC<DemoHeaderProps> = () => {
             ...doc.data(),
           } as Product)
       );
-      // Add each product individually using addFoodITems
-        // Add each product individually using addFoodITems
+      
         if(FoodItemsNew.length === 0){
-          fetchedData.forEach(({ name, Price, Quantity, id }) => addFoodITems(name, Price, Quantity, id));
+          fetchedData.forEach(({ name, Price, Quantity, id }) =>
+            addFoodITems(name, Price, Quantity, id ? [id] : [])
+          );
+          
         }
 
       console.log('Fetched Data Header Context 1:', fetchedData);
