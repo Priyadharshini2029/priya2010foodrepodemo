@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { useDetailsContext } from '../Provider/DataContext';
 import { db } from '@/firebase';
-import { collection, getDocs } from "firebase/firestore"; // Make sure this is correct
+
 
 
 interface Product {
   name: string;
   Price: string;
   Quantity: string;
-  id?: string ;
+  id: string | undefined ;
 }
 
 interface DemoHeaderProps {
@@ -33,9 +33,7 @@ const Header: React.FC<DemoHeaderProps> = () => {
       // Add each product individually using addFoodITems
         // Add each product individually using addFoodITems
         if(FoodItemsNew.length === 0){
-          fetchedData.forEach(({ name, Price, Quantity, id }) => {
-            addFoodITems(name, Price, Quantity, id);
-          });
+          fetchedData.forEach(({ name, Price, Quantity, id }) => addFoodITems(name, Price, Quantity, id));
         }
 
       console.log('Fetched Data Header Context 1:', fetchedData);
