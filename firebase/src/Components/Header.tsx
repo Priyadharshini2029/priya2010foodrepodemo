@@ -8,7 +8,7 @@ interface Product {
   name: string;
   Price: string;
   Quantity: string;
-  id: string | undefined ;
+  id: string;
 }
 
 interface DemoHeaderProps {
