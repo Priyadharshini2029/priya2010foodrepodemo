@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { useDetailsContext } from '../Provider/DataContext';
 import { db } from '@/firebase';
-
-
+import { collection, getDocs } from "firebase/firestore"; 
 
 interface Product {
   name: string;
