@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useContext, useState } from 'react';
 
 interface Product {
     image: string | undefined;
-    ingredients: any;
+    ingredients: string[]; // Specify the type for ingredients
     calories: ReactNode;
     category: ReactNode;
     name: string;
@@ -18,7 +18,7 @@ interface AuthProviderProps {
 interface DataContextType {
     FoodItemsNew: Product[];
     setFoodItem: React.Dispatch<React.SetStateAction<Product[]>>;
-    addFoodITems: (name: string, Price: string, Quantity: string, id?: string) => void;
+    addFoodITems: (name: string, Price: string, Quantity: string, ingredients: string[], id?: string) => void; // Updated to include ingredients
 }
 
 const DetailContext = createContext<DataContextType | undefined>(undefined);
@@ -34,8 +34,9 @@ export const useDetailsContext = () => {
 export const DataContext = ({ children }: AuthProviderProps) => {
     const [FoodItemsNew, setFoodItem] = useState<Product[]>([]);
 
-    const addFoodITems = (name: string, Price: string, Quantity: string, id?: string) => {
-        setFoodItem((prevNotes) => [...prevNotes, { name, Price, Quantity, id }]);
+    const addFoodITems = (name: string, Price: string, Quantity: string, ingredients: string[], id?: string) => {
+        const newItem: Product = { name, Price, Quantity, ingredients, id, image: undefined, calories: null, category: null }; // Ensure all properties are included
+        setFoodItem((prevItems) => [...prevItems, newItem]);
     };
 
     return (

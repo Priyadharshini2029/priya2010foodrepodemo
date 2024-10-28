@@ -21,7 +21,7 @@ export default function ProductTable() {
     const [FoodItems,setFoodeItem] = useState<Product[]>([]);
     const [Message, setmessage]=useState("")
     const router = useRouter();
-    const { FoodItemsNew,addFoodITems } = useDetailsContext();
+    const { FoodItemsNew } = useDetailsContext();
 
 
     useEffect(()=>{

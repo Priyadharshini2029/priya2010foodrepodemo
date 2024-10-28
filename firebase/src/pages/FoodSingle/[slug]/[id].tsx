@@ -3,14 +3,22 @@ import { useRouter } from "next/router";
 import { db } from "@/firebase"; // Import Firebase configuration
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore"; // Import Firestore functions
 
+interface FoodItem {
+  name: string;
+  Price: string;
+  Quantity: string;
+}
+
+
 const EditFoodItem = () => {
   const router = useRouter();
   const { id } = router.query; // Get dynamic `id` from the URL
-  const [foodItem, setFoodItem] = useState({
+  const [foodItem, setFoodItem] = useState<FoodItem>({
     name: "",
     Price: "",
     Quantity: "",
   });
+  
 
  
   // Fetch food item data when the component mounts
@@ -22,10 +30,10 @@ const EditFoodItem = () => {
           const foodDoc = await getDoc(foodDocRef);
 
           if (foodDoc.exists()) {
-            setFoodItem(foodDoc.data() as any); // Set the fetched data to state
+            setFoodItem(foodDoc.data() as FoodItem ); // Set the fetched data to state
           } else {
             console.log("No document found!");
-          }
+          }          
         }
       } catch (error) {
         console.error("Error fetching data:", error);
