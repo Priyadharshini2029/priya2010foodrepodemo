@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const PostDataFetch = () => {
   const [postDataDetails, setPostData] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -38,9 +38,13 @@ const PostDataFetch = () => {
       const data = await response.json();
       setPostData(data);
       console.log(data);
-    } catch (e) {
-      setError(e.message);
-      console.error(e);
+    }  catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+        console.error(e);
+      } else {
+        console.error("An unknown error occurred:", e);
+      }
     } finally {
       setIsLoading(false);
     }

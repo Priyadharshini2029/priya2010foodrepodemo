@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 const PostDataFetch = () => {
   const [postDataDetails, setPostData] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -23,8 +23,12 @@ const PostDataFetch = () => {
       setPostData(data);
       setFormData({ title: data.title, body: data.body }); // Set the form data to the fetched post data
     } catch (e) {
-      setError(e.message);
-      console.error(e);
+      if (e instanceof Error) {
+        setError(e.message);
+        console.error(e);
+      } else {
+        console.error("An unknown error occurred:", e);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -53,20 +57,24 @@ const PostDataFetch = () => {
       const data = await response.json();
       setPostData(data);
       console.log(data);
-    } catch (e) {
-      setError(e.message);
-      console.error(e);
+    }catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+        console.error(e);
+      } else {
+        console.error("An unknown error occurred:", e);
+      }
     } finally {
       setIsLoading(false);
     }
   }
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     updatePostData();
   };
