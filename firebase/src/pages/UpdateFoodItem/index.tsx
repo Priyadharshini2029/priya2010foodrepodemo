@@ -66,7 +66,11 @@ export default function ProductTable() {
         fetchData();
         setEditingProduct(null); // Clear the editing state
       } catch (error) {
-        setMessage(`Update failed for id: ${editingProduct.id},error: ${error.message} `);
+        if (error instanceof Error) {
+          setMessage(`Update failed for id: {FoodId}, Error: ${error.message}`);
+        } else {
+          setMessage(`Update failed for id: {FoodId}, An unknown error occurred.`);
+        }
       }
     }
   };

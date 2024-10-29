@@ -60,9 +60,14 @@ export default function ProductTable() {
 
           // Optionally refetch data after deletion
           fetchData();
-        } catch (error){
-         setmessage(`Delete failed for id: ${FoodId}, Error: ${error.message}`);
+        } catch (error) {
+          if (error instanceof Error) {
+            setmessage(`Delete failed for id: ${FoodId}, Error: ${error.message}`);
+          } else {
+            setmessage(`Delete failed for id: ${FoodId}, An unknown error occurred.`);
+          }
         }
+        
       };
 
 

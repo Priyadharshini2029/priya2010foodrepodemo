@@ -9,7 +9,6 @@ interface FoodItem {
   Quantity: string;
 }
 
-
 const EditFoodItem = () => {
   const router = useRouter();
   const { id } = router.query; // Get dynamic `id` from the URL
@@ -18,9 +17,8 @@ const EditFoodItem = () => {
     Price: "",
     Quantity: "",
   });
-  
+  const [error, setError] = useState<string | null>(null);
 
- 
   // Fetch food item data when the component mounts
   useEffect(() => {
     const fetchData = async () => {
@@ -30,13 +28,14 @@ const EditFoodItem = () => {
           const foodDoc = await getDoc(foodDocRef);
 
           if (foodDoc.exists()) {
-            setFoodItem(foodDoc.data() as FoodItem ); // Set the fetched data to state
+            setFoodItem(foodDoc.data() as FoodItem); // Set the fetched data to state
           } else {
             console.log("No document found!");
-          }          
+          }
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError("Error fetching data");
       }
     };
 
@@ -57,12 +56,15 @@ const EditFoodItem = () => {
     try {
       if (id) {
         const foodDocRef = doc(db, "FoodOrder", id as string); // Reference to the specific document
-        await updateDoc(foodDocRef, foodItem); // Update the document with the new data
+        // Only include the fields you want to update in Firestore
+        const { name, Price, Quantity } = foodItem;
+        await updateDoc(foodDocRef, { name, Price, Quantity });
         alert("Food item updated successfully");
-        router.push("/GetFoodItems") // Redirect to the food items list page after update
+        router.push("/GetFoodItems"); // Redirect to the food items list page after update
       }
     } catch (error) {
       console.error("Error updating food item:", error);
+      setError("Error updating food item");
     }
   };
 
@@ -77,18 +79,19 @@ const EditFoodItem = () => {
       }
     } catch (error) {
       console.error("Error deleting food item:", error);
+      setError("Error deleting food item");
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-teal-500">
-      <div className="bg-blend-multiply shadow-2xl-gray p-6 rounded-lg  border border-t-4 border-b-4 border-r-4 border-l-4  border-gray-950">
-        <h2 className="text-2xl font-bold mb-4"> Food Item</h2>
-        
+      <div className="bg-blend-multiply shadow-2xl-gray p-6 rounded-lg border border-t-4 border-b-4 border-r-4 border-l-4 border-gray-950">
+        <h2 className="text-2xl font-bold mb-4">Edit Food Item</h2>
+
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+
         <div className="mb-4">
-          <label className="block text-gray-800 font-bold mb-2" >
-            Name
-          </label>
+          <label className="block text-gray-800 font-bold mb-2">Name</label>
           <input
             id="name"
             name="name"
@@ -100,9 +103,7 @@ const EditFoodItem = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-800 font-bold mb-2" >
-            Price
-          </label>
+          <label className="block text-gray-800 font-bold mb-2">Price</label>
           <input
             id="Price"
             name="Price"
@@ -114,9 +115,7 @@ const EditFoodItem = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-800 font-bold mb-2">
-            Quantity
-          </label>
+          <label className="block text-gray-800 font-bold mb-2">Quantity</label>
           <input
             id="Quantity"
             name="Quantity"
