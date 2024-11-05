@@ -69,7 +69,7 @@ const Header: React.FC<DemoHeaderProps> = () => {
       
     }
   return (
-    <div className=' flex justify-between bg-teal-700'>
+    <div className=' flex justify-between bg-teal-800'>
         <div className=' p-3 gap-4  flex'>
             {HeaderData.map((header)=>(
                 <div key={header.Label} className=' bg-black text-white hover:bg-slate-600 border border-none p-2 rounded-lg outline-none '><a className=' text-white' href={`${header.Link}`}>{header.Label}</a></div>

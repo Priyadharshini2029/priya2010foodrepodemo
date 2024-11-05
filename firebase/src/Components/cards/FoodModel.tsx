@@ -28,8 +28,8 @@ const FoodModel: React.FC<FoodModelProps> = ( {cardDetail,setHanldeCardShow }) =
 
   return (
     <div className="fixed inset-1 bg-black/55 flex  items-center justify-center w-full h-full">
-      <button onClick={setHanldeCardShow} className=' absolute top-5 right-6 bg-black hover:bg-red-300 text-red-500'><CgCloseR size={40}/></button>
-      <div className="bg-yellow-500 rounded-lg grid grid-cols-1 justify-center items-center p-5 h-[400px] border border-t-4 border-b-4 border-r-4 border-l-4  border-gray-950  w-[400px]">
+      <button onClick={setHanldeCardShow} className=' absolute top-6 right-6 bg-black hover:bg-red-300 text-red-500'><CgCloseR size={40}/></button>
+      <div className="bg-yellow-300 rounded-lg grid grid-cols-1 justify-center items-center p-5 h-[400px] border border-t-4 border-b-4 border-r-4 border-l-4  border-gray-950  w-[400px]">
         <h2 className=' flex justify-center items-center text-white text-lg font-bold '>FoodItem</h2>
         <div className=' bg-cyan-500  justify-center items-center p-4 border border-t-2 border-b-2 border-r-2 border-l-2  border-white rounded-xl h-[90%]'>
        

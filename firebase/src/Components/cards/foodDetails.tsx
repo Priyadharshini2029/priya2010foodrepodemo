@@ -38,7 +38,7 @@ const FoodDetails = () => {
 
     return (
         <div className='h-full flex justify-center items-center p-1 w-full'>
-            <div className='h-full bg-slate-500 py-7 w-[20%] flex'>
+            <div className='h-full bg-slate-600 py-7 w-[20%] flex'>
                 <div className='flex px-1 w-[100px] h-[20px]'>
                     <p className='w-full text-black flex'> 
                         Search:
@@ -56,7 +56,7 @@ const FoodDetails = () => {
                 {FoodItemsNew
                     .filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
                     .map((details, index) => (
-                        <div key={index} className='bg-yellow-500 p-5 h-[250px] w-[200px] flex flex-col items-center'>
+                        <div key={index} className='bg-yellow-300 p-5 h-[3000px] w-[250px] flex flex-col items-center'>
                            
                             {/* <img 
                                 src={details.image} 
